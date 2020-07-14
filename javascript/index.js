@@ -132,9 +132,6 @@ function flatten(root) {
 
 //Update graph with new extended JSON objects
 function updateGraph(newURL) {
-	d3.csv("https://github.com/etsafe11/social_listening/blob/master/players.csv", function(data){
-	console.log(data);
-	})
   d3.json(newURL, function(json) {
 		root = json.words[0]; //set root node
 		root.fixed = true;
