@@ -6,8 +6,8 @@ var w = 960,
 	link,
 	root,
 	title;
-	
-//var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
+/*	
+var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 
 d3.json(jsonURL, function(json) {
 	root = json.words[0]; //set root node
@@ -16,10 +16,12 @@ d3.json(jsonURL, function(json) {
 	root.y = h / 2 - 80;
 	update();
 });
+*/
 
 d3.csv("players.csv", function(data){
 	console.log(data);
 })
+
 
 var force = d3.layout.force()
 	.on("tick", tick)
