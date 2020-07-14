@@ -1,5 +1,3 @@
-document.getElementById('date').innerHTML = new Date().toDateString();
-
 $wordToSearch = "bitter";
 
 var w = 960,
