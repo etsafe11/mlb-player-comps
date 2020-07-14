@@ -7,7 +7,7 @@ var w = 960,
 	root,
 	title;
 	
-var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
+//var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 
 d3.json(jsonURL, function(json) {
 	root = json.words[0]; //set root node
@@ -17,7 +17,7 @@ d3.json(jsonURL, function(json) {
 	update();
 });
 
-d3.csv("https://github.com/etsafe11/social_listening/blob/master/players.csv", function(data){
+d3.csv("players.csv", function(data){
 	console.log(data);
 })
 
