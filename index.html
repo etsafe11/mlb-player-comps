@@ -52,7 +52,7 @@ d3.json("AaronCivale.json", function(d) {
 });
 */
   
-var links = d3.text("https://github.com/etsafe11/mlb-player-comps/blob/master/AaronCivale.csv", function(text) {
+var links = d3.csv("https://github.com/etsafe11/mlb-player-comps/blob/master/AaronCivale.csv", function(text) {
   return text;
 });
 
