@@ -14,10 +14,10 @@
 var svg = d3.select("svg"),
   width = +svg.attr("width"),
   height = +svg.attr("height")
-  var force = null;
+  //var force = null;
 
 
-force = d3.layout.force()
+var force = d3.layout.force()
   .size([width, height])
   .nodes(nodes)
   .links(links)
