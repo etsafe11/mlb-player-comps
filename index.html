@@ -20,7 +20,7 @@ var svg = d3.select("svg"),
 var simulation = d3.forceSimulation()
   .force("link", d3.forceLink().distance(function(d) { return d.distance * 100; })
     .id(function(d) { return d.value; }))
-  .force("charge", d3.forceManyBody().strength(-50))
+  .force("charge", d3.forceManyBody().strength(-100))
   .force("center", d3.forceCenter(width/2, height/2));
   
 var nodes = [
