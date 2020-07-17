@@ -43,11 +43,14 @@ for (var i = 0; i < graph.nodes.length; i++) {
   labelAnchors.push({
     node : node
   });
-*/
+
   
-var links = d3.json("AaronCivale", function(data) {
+var links = json("AaronCivale", function(data) {
   return console.log(data);
 };
+*/
+  
+var links = JSON.parse("AaronCivale")
 
 simulation.force("link").links(links);
 
