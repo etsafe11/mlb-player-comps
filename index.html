@@ -48,7 +48,7 @@ for (var i = 0; i < graph.nodes.length; i++) {
 
 var links = d3.json("/AaronCivale.json", function(data) {
   return JSON.parse(data); 
-)};
+});
 
 
 simulation.force("link").links(links);
