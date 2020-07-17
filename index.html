@@ -64,9 +64,6 @@ function callback(data) {
   console.log(data)
   var links = data;
   simulation.force("link").links(links);
-  var linksel = svg.append("g")
-  .attr("class", "link")
-  .selectAll("line").data(links).enter().append("line")
 };
 */
 
@@ -93,6 +90,10 @@ nodesel.append("text")
   .attr("transform", "translate(0,6)")
   .text(function (d) { return d.value; });
 
+var linksel = svg.append("g")
+  .attr("class", "link")
+  .selectAll("line").data(links).enter().append("line")
+    
 var newLink = [
   {"source": "Kyle Lewis", "target": "Jarred Kelenic"},
 
