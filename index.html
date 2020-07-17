@@ -46,11 +46,11 @@ for (var i = 0; i < graph.nodes.length; i++) {
 
 */
 
-d3.json("/AaronCivale.json", function(data) {
-  var links = data; 
-  console.log(data)
+var links = d3.json("/AaronCivale.json", function(data) {
+  return data; 
 });
 
+console.log(links)
 
 simulation.force("link").links(links);
 
