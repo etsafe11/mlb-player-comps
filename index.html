@@ -50,7 +50,7 @@ d3.json("AaronCivale.json", function(d) {
   links = d;
   console.log(links);
 });
-*/
+
 
 function callback(data) {
   console.log(data)
@@ -60,17 +60,10 @@ function callback(data) {
   .attr("class", "link")
   .selectAll("line").data(links).enter().append("line");
 }
-
+*/
 //var links = null;
 d3.json("AaronCivale.txt", callback);
 
-/*
-function callback(data) {
-  console.log(data)
-  var links = data;
-  simulation.force("link").links(links);
-};
-*/
 
 //var links = JSON.stringify(links);
   
