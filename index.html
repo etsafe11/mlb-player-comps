@@ -54,7 +54,7 @@ d3.json("AaronCivale.json", function(d) {
   
 var links = d3.text("https://github.com/etsafe11/mlb-player-comps/blob/master/AaronCivale.json");
 
-var links = parseJSON(links)
+var links = JSON.parse(links)
   
 console.log(links)
 
