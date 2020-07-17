@@ -44,13 +44,12 @@ for (var i = 0; i < graph.nodes.length; i++) {
     node : node
   });
 
-  
-var links = json("AaronCivale", function(data) {
+*/
+
+  var links = d3.json("AaronCivale.json", function(data) {
   return console.log(data);
 };
-*/
-  
-var links = JSON.parse("AaronCivale")
+
 
 simulation.force("link").links(links);
 
