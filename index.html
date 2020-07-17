@@ -56,8 +56,9 @@ function callback(data) {
 console.log(data)
 }
 
-var links = d3.json("AaronCivale.txt", function(data) {
+d3.json("AaronCivale.txt", function(data) {
   console.log(data)
+  var links = data;
 });
 
 //var links = JSON.stringify(links);
