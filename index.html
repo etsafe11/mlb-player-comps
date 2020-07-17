@@ -59,23 +59,22 @@ console.log(data)
 //var links = null;
 d3.json("AaronCivale.txt", callback);
 
-/*
+
 function callback(data) {
   console.log(data)
   var links = data;
   simulation.force("link").links(links);
+  var linksel = svg.append("g")
+  .attr("class", "link")
+  .selectAll("line").data(links).enter().append("line")
 };
-*/
+
 
 //var links = JSON.stringify(links);
   
 //console.log(links);
 
 //simulation.force("link").links(links);
-
-var linksel = svg.append("g")
-  .attr("class", "link")
-  .selectAll("line").data(links).enter().append("line")
   
 var nodesel = svg.selectAll(".node")
   .data(nodes)
