@@ -18,7 +18,7 @@ var svg = d3.select("svg"),
   //var force = null;
 
 
-var force = d3.forceSimulation.force()
+var force = d3.layout.force()
   .size([width, height])
   .nodes(nodes)
   .links(links)
