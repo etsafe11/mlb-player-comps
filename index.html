@@ -51,8 +51,14 @@ d3.json("AaronCivale.json", function(d) {
   console.log(links);
 });
 */
-  
-var links = d3.json("AaronCivale.txt");
+
+function callback(data) {
+console.log(data)
+}
+
+var links = d3.json("AaronCivale.txt", function(data) {
+  console.log(data)
+});
 
 //var links = JSON.stringify(links);
   
