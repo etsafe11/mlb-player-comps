@@ -14,8 +14,7 @@
 <script>
 var svg = d3.select("svg"),
   width = +svg.attr("width"),
-  height = +svg.attr("height")
-  //var force = null;
+  height = +svg.attr("height");
 
 var simulation = d3.forceSimulation()
   .force("link", d3.forceLink().distance(function(d) { return d.distance * 70; })
@@ -39,8 +38,7 @@ var links = [{"source":"Gerrit Cole","target":"Aaron Brooks","distance":4.3778},
 var linksel = svg.append("g")
   .attr("class", "link")
   .selectAll("line").data(links).enter().append("line");
-//console.log(links);
-//console.log(linksel);
+
 
 var nodesel = svg.selectAll(".node")
   .data(nodes)
@@ -58,44 +56,50 @@ nodesel.append("circle")
 nodesel.append("text")
   .attr("transform", "translate(0,6)")
   .text(function (d) { return d.value; });
-    
-var newLink = [
-  {"source": "Kyle Lewis", "target": "Jarred Kelenic"},
 
-];
+svg.append("g")
+  .attr("id", "textbox");
 
+var active = textbox.active? true: false; 
+
+//simulation.force("link").links(links);
 function callback(data) {
   //console.log(data)
   var links = data;
   simulation.force("link").links(links);
 }
 
+
 function dblclick(d) {
   console.log('begin dblclick')
-  test = new String(d.value+".json");
-  test2 = test.replace(/\s/g, '');
-  console.log(test2)
-  links = d3.json(test2, callback);
-  console.log(links)
+  file_name = new String(d.value+".json");
+  new_file_name = file_name.replace(/\s/g, '');
+  console.log(new_file_name)
+  links = d3.json(new_file_name, callback);
+
+  if (active) { 
+    console.log(active)
+    var bar = svg.append("rect")
+      .attr("width",250)
+      .attr("height",100)
+      .style("fill", "white");
+
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .text(d.value);
+  };
   
-  var box = svg.append("g")
-    .attr("transform", "translate(50,50)");
-  /*
-  var box = svg.append("rect")
-     .attr('y', 0)
-     .attr('x', 0)
-     .attr('height', 50)
-     .attr('width', 200)
-     .attr('fill', 'white')
-   */
-    
-  //var text = box.remove()
-  var text = box
+  var textbox = svg.append("g")
+    .attr("transform", "translate(50,50)")
     .append("text")
     .attr("x", 0)
     .attr("y", 0)
-    //.attr("fill", "white")
-    .text(d.value)
+    .text(d.value);
+  
+  active = true;
 }
     
 simulation.on("tick", ticked);
