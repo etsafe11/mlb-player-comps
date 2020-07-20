@@ -2,15 +2,22 @@
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <body>
+
 <form name="myForm">
-  <label><input type = "radio" name="radio_b" value = "0" >Gerrit Cole</label>
+  <label><input type = "radio" name="radio_b" value = 0>Gerrit Cole</label>
   <br />
-  <label><input type = "radio" name="radio_b" value = "1">Jacob deGrom</label>
-  <br />
-  <label><input type = "radio" name="radio_b" value = "2">Lance Lynn</label>    
+  <label><input type = "radio" name="radio_b" value = 1>Jacob deGrom</label>
+  <br /> 
+  <label><input type = "radio" name="radio_b" value = 2>Lance Lynn</label>    
 </form>
 
+<input type="button" value="Clear Selection" id="ExampleTrigger">
+
 <style> 
+$('#ExampleTrigger').click(function() {
+    $('input[name=example]').prop('checked', false);
+});
+
 .link line {stroke: black;}
 .node circle {stroke: black; fill: white;}
 .node text {text-anchor: middle; font-size: 12px}
@@ -237,7 +244,7 @@ function inputChange() {
   var file_name = new String(node.value+".json");
   var new_file_name = file_name.replace(/\s/g, '');
   console.log(new_file_name) 
-  var links = null;
+  var links = null; 
   links = d3.json(new_file_name, callback); 
   console.log(links)  
 }
@@ -257,10 +264,11 @@ for(var i = 0; i < rad.length; i++) {
       console.log(new_file_name)
       console.log('xxx')
       console.log(node.value)
+      var links = [];
       links = d3.json(new_file_name, callback);
       
       //dblclick(node);
-      simulation.on("tick", ticked); 
+       
       /*
       var links = [];
       links = d3.json(new_file_name, callback);
