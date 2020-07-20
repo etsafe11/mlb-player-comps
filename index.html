@@ -2,7 +2,7 @@
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <body>
-<form>
+<form name="myForm">
   <label><input type = "radio" name="radio_b" value = "0" >Gerrit Cole</label>
   <br />
   <label><input type = "radio" name="radio_b" value = "1">Jacob deGrom</label>
@@ -40,7 +40,6 @@ links = d3.json("GerritCole.json", callback);
 var linksel = svg.append("g")
   .attr("class", "link")
   .selectAll("line").data(links).enter().append("line");
-
 
 var nodesel = svg.selectAll(".node")
   .data(nodes)
@@ -218,13 +217,15 @@ function dragged(d) {
   d.fy = d3.event.y; 
 }
 function dragended(d) {
-  if (!d3.event.active) simulation.alphaTarget(0); 
+  if (!d3.event.active) simulation.alphaTarget(0);  
   d.fx = null;
-  d.fy = null;
+  d.fy = null; 
 }
-var inputElems = d3.selectAll("input");
-console.log(inputElems) 
+//var inputElems = d3.selectAll("input");
+//console.log(inputElems) 
+//inputElems.on("change", inputChange)
 
+/*
 function inputChange() { 
   console.log('zzz') 
   console.log(this.value); 
@@ -232,13 +233,31 @@ function inputChange() {
   console.log(node)
   var file_name = new String(node.value+".json");
   var new_file_name = file_name.replace(/\s/g, '');
-  console.log(new_file_name)
-  
-  links = d3.json(new_file_name, callback);
-  console.log(links) 
+  console.log(new_file_name) 
+  var links = null;
+  links = d3.json(new_file_name, callback); 
+  console.log(links)  
 }
+*/
 
-inputElems.on("change", inputChange)
+var rad = document.myForm.radio_b;
+var prev = null;
+for(var i = 0; i < rad.length; i++) {
+    rad[i].onclick = function () {
+      console.log(this)
+      console.log(this.value)
+      var node = nodes[this.value];  
+      console.log(node)
+      console.log(node.value)
+      var file_name = new String(node.value+".json");
+      var new_file_name = file_name.replace(/\s/g, '');
+      console.log(new_file_name)
+      var links = [];
+      links = d3.json(new_file_name, callback);
+      console.log(node)
+    };
+    simulation.on("tick", ticked); 
+}
 
 </script>
 </body>
