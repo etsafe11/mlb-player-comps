@@ -74,14 +74,17 @@ function callback(data) {
   simulation.force("link").links(links);
 }
 
+simulation.force("link").links(links);
 
 function dblclick(d) {
   console.log('begin dblclick')
   file_name = new String(d.value+".json");
   new_file_name = file_name.replace(/\s/g, '');
   console.log(new_file_name)
+  console.log('fuck')
   
   links = d3.json(new_file_name, callback);
+  console.log(links)
 
   d3.select(this)
     .select('circle')
@@ -187,7 +190,7 @@ function dblclick(d) {
     .text(d.BB + ' BB/9');
   var textbox = svg.append("g") 
     .attr("transform", "translate(50,50)")
-    .append("text")
+    .append("text") 
     .attr("y", 100)
     .text(d.HR + ' HR/9');
   active = true;
@@ -238,25 +241,32 @@ function inputChange() {
   links = d3.json(new_file_name, callback); 
   console.log(links)  
 }
-*/
+*/ 
 
 var rad = document.myForm.radio_b;
 var prev = null;
 for(var i = 0; i < rad.length; i++) {
     rad[i].onclick = function () {
       console.log(this)
-      console.log(this.value)
+      console.log(this.value) 
       var node = nodes[this.value];  
-      console.log(node)
+      console.log(node) 
       console.log(node.value)
       var file_name = new String(node.value+".json");
       var new_file_name = file_name.replace(/\s/g, '');
       console.log(new_file_name)
+      console.log('xxx')
+      console.log(node.value)
+      links = d3.json(new_file_name, callback);
+      
+      //dblclick(node);
+      simulation.on("tick", ticked); 
+      /*
       var links = [];
       links = d3.json(new_file_name, callback);
       console.log(node)
+      */
     };
-    simulation.on("tick", ticked); 
 }
 
 </script>
