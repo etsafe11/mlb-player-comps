@@ -76,125 +76,17 @@ svg.append("g")
 var active = textbox.active? true: false; 
 
 d3.selectAll("input").on("change", function(){
+ 
   var node = nodes[this.value];  
   console.log(node) 
   var file_name = new String(node.value+".json");
   var new_file_name = file_name.replace(/\s/g, '');
   console.log(new_file_name) 
-  var links = null; 
   links = d3.json(new_file_name, callback); 
-  //dblclick(links);
-  console.log(nodes[this.value]) 
-  
-  d3.select(nodes[this.value])
-    .select('circle')
-      .transition()
-        .duration(750)
-        .attr("r", 75)
-        .attr("stroke", "black")
-        .style("fill", "yellow")
-        .style("opacity", .75)
-            console.log('fuck fuck')
-      .transition()
-        .duration(750)
-        .attr("r", 12)
-        .attr("stroke", "black")
-        .style("fill", function(d) { return colors(d.WAR); })
-        .style("opacity", .50)
-      .transition()
-        .duration(500)
-        .attr("r", 75) 
-        .attr("stroke", "black")
-        .style("fill", "yellow")
-        .style("opacity", .75) 
-      .transition()
-        .duration(250)
-        .attr("r", 12)
-        .attr("stroke", "black")
-        .style("fill", function(d) { return colors(d.WAR); })
-        .style("opacity", .50);
 
-  if (active) { 
-    //console.log(active) 
-    var bar = svg.append("rect")
-      .attr("transform", "translate(40,30)")
-      .attr("width",150)
-      .attr("height",140)
-      .style("fill", "lightyellow")
-      .style("opacity", 1) 
-      .style("stroke", "black");
+  simulation.force("link").links(links);
 
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("x", 0)
-      .attr("y", 0)
-      .text(this.value)
-      .append("text")
-      .attr("y", 20)
-      .text(this.WAR + ' WAR');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 40)
-      .text(this.IP + ' IP');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 60)
-      .text(this.K + ' K/9');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 80)
-      .text(this.BB + ' BB/9');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 100)
-      .text(this.HR + ' HR/9');
-  };
-  
-  var bar = svg.append("rect")
-    .attr("transform", "translate(40,30)")
-    .attr("width",150)
-    .attr("height",140)
-    .style("fill", "lightyellow")
-    .style("opacity", 1)
-    .style("stroke", "black");
-  var textbox = svg.append("g")
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("x", 0)
-    .attr("y", 0)
-    .text(this.value);
-  var textbox = svg.append("g")
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("x", 0)
-    .attr("y", 20)
-    .text(this.WAR + ' WAR');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 40)
-    .text(this.IP + ' IP');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 60)
-    .text(this.K + ' K/9');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 80)
-    .text(this.BB + ' BB/9');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text") 
-    .attr("y", 100)
-    .text(this.HR + ' HR/9');
-  active = true;
+  simulation.alpha(0.8).restart();
 }); 
 
 //simulation.force("link").links(links);
@@ -361,4 +253,3 @@ function dragended(d) {
 </script>
 </body>
 </html>
- 
