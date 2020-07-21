@@ -1,8 +1,8 @@
 <html>
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<body>
- 
+<body> 
+
 <form name="myForm"> 
   <label><input type = "radio" name="radio_b" value = 0>Gerrit Cole</label> 
   <br />
@@ -46,7 +46,12 @@ links = d3.json("GerritCole.json", callback);
 
 var linksel = svg.append("g")
   .attr("class", "link")
-  .selectAll("line").data(links).enter().append("line");
+  .selectAll("line")
+  .data(links)
+  .enter()
+  .append("line")
+  .exit()
+  .remove();
 
 var nodesel = svg.selectAll(".node")
   .data(nodes)
