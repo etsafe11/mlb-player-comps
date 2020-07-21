@@ -11,12 +11,7 @@
   <label><input type = "radio" name="radio_b" value = 151>Felix Hernandez</label>  
 </form>
 
-<input type="button" value="Clear Selection" id="ExampleTrigger">
-
 <style> 
-$('#ExampleTrigger').click(function() {
-    $('input[name=example]').prop('checked', false);
-});
 
 .link line {stroke: black;}
 .node circle {stroke: black; fill: white;}
@@ -53,6 +48,7 @@ var linksel = svg.append("g")
   .exit()
   .remove();
 
+
 var nodesel = svg.selectAll(".node")
   .data(nodes)
   .enter().append("g")
@@ -78,6 +74,128 @@ svg.append("g")
   .attr("id", "textbox");
 
 var active = textbox.active? true: false; 
+
+d3.selectAll("input").on("change", function(){
+  var node = nodes[this.value];  
+  console.log(node) 
+  var file_name = new String(node.value+".json");
+  var new_file_name = file_name.replace(/\s/g, '');
+  console.log(new_file_name) 
+  var links = null; 
+  links = d3.json(new_file_name, callback); 
+  //dblclick(links);
+  console.log(nodes[this.value]) 
+  
+  d3.select(nodes[this.value])
+    .select('circle')
+      .transition()
+        .duration(750)
+        .attr("r", 75)
+        .attr("stroke", "black")
+        .style("fill", "yellow")
+        .style("opacity", .75)
+            console.log('fuck fuck')
+      .transition()
+        .duration(750)
+        .attr("r", 12)
+        .attr("stroke", "black")
+        .style("fill", function(d) { return colors(d.WAR); })
+        .style("opacity", .50)
+      .transition()
+        .duration(500)
+        .attr("r", 75) 
+        .attr("stroke", "black")
+        .style("fill", "yellow")
+        .style("opacity", .75) 
+      .transition()
+        .duration(250)
+        .attr("r", 12)
+        .attr("stroke", "black")
+        .style("fill", function(d) { return colors(d.WAR); })
+        .style("opacity", .50);
+
+  if (active) { 
+    //console.log(active) 
+    var bar = svg.append("rect")
+      .attr("transform", "translate(40,30)")
+      .attr("width",150)
+      .attr("height",140)
+      .style("fill", "lightyellow")
+      .style("opacity", 1) 
+      .style("stroke", "black");
+
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .text(this.value)
+      .append("text")
+      .attr("y", 20)
+      .text(this.WAR + ' WAR');
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 40)
+      .text(this.IP + ' IP');
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 60)
+      .text(this.K + ' K/9');
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 80)
+      .text(this.BB + ' BB/9');
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 100)
+      .text(this.HR + ' HR/9');
+  };
+  
+  var bar = svg.append("rect")
+    .attr("transform", "translate(40,30)")
+    .attr("width",150)
+    .attr("height",140)
+    .style("fill", "lightyellow")
+    .style("opacity", 1)
+    .style("stroke", "black");
+  var textbox = svg.append("g")
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("x", 0)
+    .attr("y", 0)
+    .text(this.value);
+  var textbox = svg.append("g")
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("x", 0)
+    .attr("y", 20)
+    .text(this.WAR + ' WAR');
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 40)
+    .text(this.IP + ' IP');
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 60)
+    .text(this.K + ' K/9');
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 80)
+    .text(this.BB + ' BB/9');
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text") 
+    .attr("y", 100)
+    .text(this.HR + ' HR/9');
+  active = true;
+}); 
 
 //simulation.force("link").links(links);
 function callback(data) {
@@ -236,53 +354,9 @@ function dragended(d) {
   d.fx = null;
   d.fy = null; 
 }
-//var inputElems = d3.selectAll("input");
-//console.log(inputElems) 
-//inputElems.on("change", inputChange)
 
-/*
-function inputChange() { 
-  console.log('zzz') 
-  console.log(this.value); 
-  var node = nodes[this.value];  
-  console.log(node)
-  var file_name = new String(node.value+".json");
-  var new_file_name = file_name.replace(/\s/g, '');
-  console.log(new_file_name) 
-  var links = null; 
-  links = d3.json(new_file_name, callback); 
-  console.log(links)  
-}
-*/ 
-  
-var rad = document.myForm.radio_b;
-var prev = null;
-for(var i = 0; i < rad.length; i++) {
-    rad[i].onclick = function () {
-      console.log(this)
-      console.log(this.value) 
-      var node = nodes[this.value];  
-      console.log(node) 
-      console.log(node.value)
-      var file_name = new String(node.value+".json");
-      var new_file_name = file_name.replace(/\s/g, '');
-      console.log(new_file_name)
-      console.log('xxx')
-      console.log(node.value)
-      var links = [];
-      active = true;
-      links = d3.json(new_file_name, callback);
-      
-      //dblclick(node);
-       
-      /*
-      var links = [];
-      links = d3.json(new_file_name, callback);
-      console.log(node)
-      */
-    };
-}
 
 </script>
 </body>
 </html>
+ 
