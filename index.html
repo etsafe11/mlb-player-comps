@@ -254,7 +254,7 @@ function inputChange() {
   console.log(links)  
 }
 */ 
-
+  
 var rad = document.myForm.radio_b;
 var prev = null;
 for(var i = 0; i < rad.length; i++) {
@@ -270,6 +270,7 @@ for(var i = 0; i < rad.length; i++) {
       console.log('xxx')
       console.log(node.value)
       var links = [];
+      active = true;
       links = d3.json(new_file_name, callback);
       
       //dblclick(node);
