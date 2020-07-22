@@ -1,8 +1,10 @@
 <html>
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <body> 
 
+<h2>Major League Baseball Pitcher Similarities</h2>
 Below is a graph of Major League Baseball pitcher similarities. Double-click on any node to see the pitchers who were most similar to the selected pitcher in 2019. More similar pitchers will be positioned closer to the selected pitcher and less similar pitchers will be located further from him. Here we define similarity as the Euclidean distance between the normalized rates of Walks (BB), Strikeouts (K) and Home Runs (HR) per nine inning game between two pitchers.
 <br />
 <br />
@@ -24,15 +26,17 @@ Click on each of the three radio buttons below to see examples.
 </form>
 
 <style> 
-
 .link line {stroke: black;}
 .node circle {stroke: black; fill: white;}
-.node text {text-anchor: middle; font-size: 12px}
+.node text {text-anchor: middle; font-size: 12px; font-family:"sans-serif"}
 </style>
 
 <svg width="1200" height="800"></svg>
 
+<span style="font-family:Arial">This text is in Arial</span>
+
 <script>
+
 var svg = d3.select("svg"),
   width = +svg.attr("width"),
   height = +svg.attr("height");
@@ -78,7 +82,7 @@ nodesel.append("circle")
   .style("fill", function(d) { return colors(d.WAR); });
   
 nodesel.append("text")
-  .attr("transform", "translate(0,6)")
+  .attr("transform", "translate(0,6)") 
   .text(function (d) { return d.value; });
 
 svg.append("g")
@@ -313,7 +317,7 @@ function ticked() {
     
   nodesel.attr("transform", function(d) {
     return "translate(" + d.x + "," + d.y + ")";
-  });
+  }); 
 
  }
   
