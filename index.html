@@ -107,33 +107,33 @@ d3.selectAll("input").on("change", function(){
 
   simulation.alpha(0.8).restart();
 
-  d3.select(this)
-    .select('circle')
-      .transition()
-        .duration(750)
-        .attr("r", 75)
-        .attr("stroke", "black")
-        .style("fill", "yellow")
-        .style("opacity", .75)
-      .transition()
-        .duration(750)
-        .attr("r", 12)
-        .attr("stroke", "black")
-        .style("fill", function(d) { return colors(d.WAR); })
-        .style("opacity", .50)
-      .transition()
-        .duration(500)
-        .attr("r", 75) 
-        .attr("stroke", "black")
-        .style("fill", "yellow")
-        .style("opacity", .75) 
-      .transition()
-        .duration(250)
-        .attr("r", 12)
-        .attr("stroke", "black")
-        .style("fill", function(d) { return colors(d.WAR); })
-        .style("opacity", .50);
+}); 
+
+//simulation.force("link").links(links);
+function callback(data) {
+  //console.log(data)
   
+  var links = data;
+  var node;
+  
+  simulation.force("link").links(links);
+
+  var player = links[0].target.value;
+  var player_string = player;
+
+  for (x in nodes) {
+
+    var player_name = nodes[x].value;
+
+    if(player_name == player_string){
+      console.log("wow")
+      node = nodes[x];
+    }
+  }
+ 
+console.log(node)
+
+
   var bar = svg.append("rect")
     .attr("transform", "translate(40,30)")
     .attr("width",170)
@@ -146,7 +146,7 @@ d3.selectAll("input").on("change", function(){
     .append("text")
     .attr("x", 0)
     .attr("y", 0)
-    .text(node.value);
+    .text(links[0].source.value);
   var textbox = svg.append("g")
     .attr("transform", "translate(50,50)")
     .append("text")
@@ -162,54 +162,44 @@ d3.selectAll("input").on("change", function(){
     .attr("transform", "translate(50,50)")
     .append("text")
     .attr("y", 60)
-    .text(node.K + ' K/9');
+    .text(node.K +' K/9');
   var textbox = svg.append("g") 
     .attr("transform", "translate(50,50)")
     .append("text")
     .attr("y", 80)
-    .text(node.BB + ' BB/9');
+    .text(node.BB +' BB/9');
   var textbox = svg.append("g") 
     .attr("transform", "translate(50,50)")
     .append("text") 
     .attr("y", 100)
     .text(node.HR + ' HR/9');
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 120)
+    .text(" "); 
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 140)
+    .text("Most similar pitchers:");
+  var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 160)
+    .text(links[1].source.value);
+    var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 180)
+    .text(links[2].source.value);
+    var textbox = svg.append("g") 
+    .attr("transform", "translate(50,50)")
+    .append("text")
+    .attr("y", 200)
+    .text(links[3].source.value);
   active = true;
-
-}); 
-
-//simulation.force("link").links(links);
-function callback(data) {
-  //console.log(data)
-  var links = data;
-  simulation.force("link").links(links);
   
-  if(active){
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 120)
-      .text(" "); 
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 140)
-      .text("Most similar pitchers:");
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 160)
-      .text(links[2].source.value);
-      var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 180)
-      .text(links[3].source.value);
-      var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 200)
-      .text(links[4].source.value);
-  }
 }
 
 simulation.force("link").links(links);
@@ -249,113 +239,6 @@ function dblclick(d) {
         .attr("stroke", "black")
         .style("fill", function(d) { return colors(d.WAR); })
         .style("opacity", .50);
-
-  if (active) { 
-    //console.log(active) 
-    var bar = svg.append("rect")
-      .attr("transform", "translate(40,30)")
-      .attr("width",170)
-      .attr("height",230)
-      .style("fill", "lightyellow")
-      .style("opacity", 1) 
-      .style("stroke", "black");
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 120)
-      .text(" "); 
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 140)
-      .text("Most similar pitchers:");
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 160)
-      .text(links[2].source.value);
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 180)
-      .text(links[3].source.value);
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 200)
-      .text(links[4].source.value);
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("x", 0)
-      .attr("y", 0)
-      .text(d.value)
-      .append("text")
-      .attr("y", 20)
-      .text(d.WAR + ' WAR');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 40)
-      .text(d.IP + ' IP');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 60)
-      .text(d.K + ' K/9');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 80)
-      .text(d.BB + ' BB/9');
-    var textbox = svg.append("g") 
-      .attr("transform", "translate(50,50)")
-      .append("text")
-      .attr("y", 100)
-      .text(d.HR + ' HR/9');
-  };
-  
-  var bar = svg.append("rect")
-    .attr("transform", "translate(40,30)")
-    .attr("width",170)
-    .attr("height",230)
-    .style("fill", "lightyellow")
-    .style("opacity", 1)
-    .style("stroke", "black");
-  
-  var textbox = svg.append("g")
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("x", 0)
-    .attr("y", 0)
-    .text(d.value);
-  var textbox = svg.append("g")
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("x", 0)
-    .attr("y", 20)
-    .text(d.WAR + ' WAR');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 40)
-    .text(d.IP + ' IP');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 60)
-    .text(d.K + ' K/9');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text")
-    .attr("y", 80)
-    .text(d.BB + ' BB/9');
-  var textbox = svg.append("g") 
-    .attr("transform", "translate(50,50)")
-    .append("text") 
-    .attr("y", 100)
-    .text(d.HR + ' HR/9');
-  active = true;
   
   simulation.alpha(0.8).restart();
 }
