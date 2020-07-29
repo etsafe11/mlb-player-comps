@@ -36,7 +36,7 @@ Double-click on any player below to see details about their WAR, Innings Pitched
 .node text {text-anchor: middle; font-size: 12px; font-family:"Times New Roman"}
 </style>
 
-<svg width="1200" height="800"></svg>
+<svg width="1200" height="1000"></svg>
 
 <script>
 
@@ -133,13 +133,11 @@ d3.selectAll("input").on("change", function(){
         .attr("stroke", "black")
         .style("fill", function(d) { return colors(d.WAR); })
         .style("opacity", .50);
-
-
   
   var bar = svg.append("rect")
     .attr("transform", "translate(40,30)")
-    .attr("width",150)
-    .attr("height",140)
+    .attr("width",170)
+    .attr("height",230)
     .style("fill", "lightyellow")
     .style("opacity", 1)
     .style("stroke", "black");
@@ -184,6 +182,34 @@ function callback(data) {
   //console.log(data)
   var links = data;
   simulation.force("link").links(links);
+  
+  if(active){
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 120)
+      .text(" "); 
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 140)
+      .text("Most similar pitchers:");
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 160)
+      .text(links[2].source.value);
+      var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 180)
+      .text(links[3].source.value);
+      var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 200)
+      .text(links[4].source.value);
+  }
 }
 
 simulation.force("link").links(links);
@@ -196,7 +222,6 @@ function dblclick(d) {
   console.log('fuck')
   
   links = d3.json(new_file_name, callback);
-  console.log(links)
 
   d3.select(this)
     .select('circle')
@@ -229,12 +254,36 @@ function dblclick(d) {
     //console.log(active) 
     var bar = svg.append("rect")
       .attr("transform", "translate(40,30)")
-      .attr("width",150)
-      .attr("height",140)
+      .attr("width",170)
+      .attr("height",230)
       .style("fill", "lightyellow")
       .style("opacity", 1) 
       .style("stroke", "black");
-
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 120)
+      .text(" "); 
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 140)
+      .text("Most similar pitchers:");
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 160)
+      .text(links[2].source.value);
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 180)
+      .text(links[3].source.value);
+    var textbox = svg.append("g") 
+      .attr("transform", "translate(50,50)")
+      .append("text")
+      .attr("y", 200)
+      .text(links[4].source.value);
     var textbox = svg.append("g") 
       .attr("transform", "translate(50,50)")
       .append("text")
@@ -268,11 +317,12 @@ function dblclick(d) {
   
   var bar = svg.append("rect")
     .attr("transform", "translate(40,30)")
-    .attr("width",150)
-    .attr("height",140)
+    .attr("width",170)
+    .attr("height",230)
     .style("fill", "lightyellow")
     .style("opacity", 1)
     .style("stroke", "black");
+  
   var textbox = svg.append("g")
     .attr("transform", "translate(50,50)")
     .append("text")
