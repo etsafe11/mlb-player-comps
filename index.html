@@ -22,7 +22,7 @@ Click on each of the three radio buttons below to see examples.
   <label><input type = "radio" name="radio_b" value = 1>2. Jacob deGrom was another excellent pitcher in 2019. Note, however, that the most similar pitchers to deGrom are much closer to him than any pitcher is to Gerrit Cole. In other words, it's much easier to find pitchers similar to Jacob deGrom than to Gerrit Cole. Gerrit Cole truly stood in a "league of his own" in 2019.</label>
   <br />
   <br />  
-  <label><input type = "radio" name="radio_b" value = 61>3. Reynaldo Lopez had a solidly above-average season in 2019, worth 2.3 WAR. But interestingly, we see that many of the pitchers most similar to Lopez performed poorly in 2019, as indicated by the shades between purple and blue for players such as Alex Young and Tyler Beede. This could be an indication that Lopez "over-performed" last season relative to his underlying K, BB and HR metrics.</label>  
+  <label><input type = "radio" name="radio_b" value = 61>3. Reynaldo Lopez had a solidly above-average season in 2019, worth 2.3 WAR. But interestingly, we see that many of the pitchers most similar to Lopez performed poorly in 2019, as indicated by the shades between purple and blue for players such as Alex Young and Tyler Beede. This could be an indication that Lopez "over-performed" last season relative to his underlying K, BB and HR metrics.</label> 
 </form>
   
 <br />
@@ -94,7 +94,7 @@ svg.append("g")
 var active = textbox.active? true: false; 
 
 d3.selectAll("input").on("change", function(){
- 
+  
   var node = nodes[this.value];  
   console.log(node.value) 
   console.log('ddd')
@@ -205,6 +205,7 @@ console.log(node)
 simulation.force("link").links(links);
 
 function dblclick(d) {
+  clearRads();
   console.log('begin dblclick')
   file_name = new String(d.value+".json");
   new_file_name = file_name.replace(/\s/g, '');
@@ -272,6 +273,9 @@ function dragended(d) {
   d.fy = null; 
 }
 
+function clearRads() {
+  d3.selectAll('input').property('checked', false);
+}
 
 </script>
 </body>
