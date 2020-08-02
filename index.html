@@ -2,6 +2,16 @@
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+<style> 
+.link line {stroke: black;}
+.node circle {stroke: black; fill: white;}
+.node text {text-anchor: middle; font-size: 12px; font-family:"Roboto"}
+html, body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", cursive, sans-serif;
+</style>
+
 <body> 
 
 <h2>Major League Baseball Pitcher Similarities</h2>
@@ -29,12 +39,6 @@ Click on each of the three radio buttons below to see examples.
 <br />
 Double-click on any player below to see details about their WAR, Innings Pitched (IP) and K, BB and HR per nine innings (K/9, BB/9 and HR/9 respectively).
 <br />
-
-<style> 
-.link line {stroke: black;}
-.node circle {stroke: black; fill: white;}
-.node text {text-anchor: middle; font-size: 12px; font-family:"Times New Roman"}
-</style>
 
 <svg width="1200" height="1000"></svg>
 
@@ -77,7 +81,8 @@ var nodesel = svg.selectAll(".node")
     .on("end", dragended))
     .on("dblclick", dblclick);
 
-var colors = d3.scaleLinear().domain([-2.2,2.2]).range(["blue","red"]);
+var colors = d3.scaleLinear().domain([-0.6,2.9]).range(["blue","red"]);
+
 
 nodesel.append("circle") 
   .attr("r", 12)
@@ -102,6 +107,12 @@ d3.selectAll("input").on("change", function(){
   var new_file_name = file_name.replace(/\s/g, '');
   console.log(new_file_name) 
   links = d3.json(new_file_name, callback); 
+
+  d3.select(node.value).append("circle")
+    .attr("cx", 500)
+    .attr("r", 12)
+    .style("opacity", .5)
+    .style("fill", "yellow");
 
   simulation.force("link").links(links);
 
@@ -131,7 +142,8 @@ function callback(data) {
     }
   }
  
-console.log(node)
+  console.log(node)
+
 
 
   var bar = svg.append("rect")
