@@ -294,17 +294,17 @@ function clearRads() {
 var fisheye = d3.fisheye.circular()
     .radius(200)
     .distortion(2);
-
-console.log(fisheye)
-
+//console.log(fisheye)
+ 
 function mousemove(d) {
 
   fisheye.focus(d3.mouse(this));
-
+  console.log(fisheye)
   nodesel.each(function(d) { d.fisheye = fisheye(d); })
-      .attr("cx", function(d) { return d.fisheye.x; })
-      .attr("cy", function(d) { return d.fisheye.y; })
-      .attr("r", function(d) { return d.fisheye.z * 4.5; });
+  .attr("x", function(d) { return d.fisheye.x; })
+  .attr("y", function(d) { return d.fisheye.y; })
+  .attr("r", function(d) { return d.fisheye.r; });
+  
 
 };
 
