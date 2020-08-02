@@ -2,8 +2,6 @@
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-<script type="text/javascript" src="fisheye.js"></script>
-
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
 <style> 
@@ -16,7 +14,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 
 <body> 
 
-<h2 align="center">Major League Baseball Pitcher Similarities</h2>
+<h2>Major League Baseball Pitcher Similarities</h2>
 Below is a graph of Major League Baseball pitcher similarities. Double-click on any node to see the pitchers who were most similar to the selected pitcher in 2019. More similar pitchers will be positioned closer to the selected pitcher and less similar pitchers will be located further from him. Here we define similarity as the Euclidean distance between the normalized rates of Walks (BB), Strikeouts (K) and Home Runs (HR) per nine inning game between two pitchers.
 <br />
 <br />
@@ -28,7 +26,7 @@ Click on each of the three radio buttons below to see examples.
 <br />
   
 <form name="myForm">  
-  <label><input type = "radio" name="radio_b" value = 0 checked="checked">1. Gerrit Cole was the consensus best pitcher in Major League Baseball in 2019. The most similar pitchers to him were Chris Sale, Justin Verlander and Max Scherzer - all three very good pitchers themselves. </label> 
+  <label><input type = "radio" name="radio_b" value = 0 checked="checked">1. Gerrit Cole was the consensus best pitcher in Major League Baseball in 2019. The most similar pitchers to him were Chris Sale, Justin Verlander and Max Scherzer - all three very good pitchers. </label> 
   <br /> 
   <br />
   <label><input type = "radio" name="radio_b" value = 1>2. Jacob deGrom was another excellent pitcher in 2019. Note, however, that the most similar pitchers to deGrom are much closer to him than any pitcher is to Gerrit Cole. In other words, it's much easier to find pitchers similar to Jacob deGrom than to Gerrit Cole. Gerrit Cole truly stood in a "league of his own" in 2019.</label>
@@ -36,7 +34,8 @@ Click on each of the three radio buttons below to see examples.
   <br />  
   <label><input type = "radio" name="radio_b" value = 61>3. Reynaldo Lopez had a solidly above-average season in 2019, worth 2.3 WAR. But interestingly, we see that many of the pitchers most similar to Lopez performed poorly in 2019, as indicated by the shades between purple and blue for players such as Alex Young and Tyler Beede. This could be an indication that Lopez "over-performed" last season relative to his underlying K, BB and HR metrics.</label> 
 </form>
-
+  
+<br />
 <br />
 Double-click on any player below to see details about their WAR, Innings Pitched (IP) and K, BB and HR per nine innings (K/9, BB/9 and HR/9 respectively).
 <br />
@@ -80,8 +79,7 @@ var nodesel = svg.selectAll(".node")
     .on("start", dragstarted)
     .on("drag", dragged)
     .on("end", dragended))
-    .on("dblclick", dblclick)
-    .on("mousemove", mousemove);
+    .on("dblclick", dblclick);
 
 var colors = d3.scaleLinear().domain([-0.6,2.9]).range(["blue","red"]);
 
@@ -290,25 +288,6 @@ function dragended(d) {
 function clearRads() {
   d3.selectAll('input').property('checked', false);
 }
-
-var fisheye = d3.fisheye.circular()
-    .radius(200)
-    .distortion(2);
-
-console.log(fisheye)
-
-function mousemove(d) {
-
-  fisheye.focus(d3.mouse(this));
-
-  nodesel.each(function(d) { d.fisheye = fisheye(d); })
-      .attr("cx", function(d) { return d.fisheye.x; })
-      .attr("cy", function(d) { return d.fisheye.y; })
-      .attr("r", function(d) { return d.fisheye.z * 4.5; });
-
-};
-
-  
 
 </script>
 </body>
